@@ -15,7 +15,7 @@ public class PlayerController : InputBus
     {
         Vector3 moveVect = new Vector3(Mathf.RoundToInt(controller.move.Value), 0, 0);
         input.SetAxis("Move", moveVect);
-        input.SetButton("Jump", controller.jump.IsPressed);
+        input.SetButton("Jump", controller.jump.WasPressed);
         UpdateActions(input);
     }
     

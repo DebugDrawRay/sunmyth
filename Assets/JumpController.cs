@@ -25,7 +25,7 @@ public class JumpController : ActionController
         get
         {
             Ray groundRay = new Ray(transform.position, -transform.up);
-            return Physics.Raycast(groundRay, groundRayLength);
+            return Physics.Raycast(groundRay, groundRayLength, groundLayers);
         }
     }
 
@@ -35,22 +35,29 @@ public class JumpController : ActionController
     }
     void Update()
     {
-        CheckJump();
+        Debug.Log(grounded);
+        if(grounded && jumping)
+        {
+            jumping = false;
+        }
+        //CheckJump();
     }
 
     void CheckJump()
     {
         if(jumping)
         {
-            rigid.AddForce(transform.up * jumpStrength, ForceMode.VelocityChange);
+            rigid.AddForce(transform.up * jumpStrength);
         }
     }
 
     protected override void Action(InputSource input)
     {
-        if(input.GetButton(jumpBinding) && !jumping && grounded)
+        if(input.GetButton(jumpBinding) && grounded)
         {
-            StartCoroutine(ShortJump(input, shortJumpLength));
+            rigid.AddForce(transform.up * jumpStrength);
+            jumping = true;
+            //StartCoroutine(ShortJump(input, shortJumpLength));
         }
     }
 
