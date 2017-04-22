@@ -23,19 +23,22 @@ public class TwoAxisMovement : ActionController
     }
     protected override void Action(InputSource input)
     {
-        if (input.GetAxis(moveBinding) == Vector3.zero && currentSpeed > 0)
+        if (input.GetAxis(moveBinding) == Vector3.zero)
         {
-            currentSpeed -= moveAccel;
-            currentSpeed = Mathf.Clamp(currentSpeed, 0, Mathf.Infinity);
+            if (currentSpeed > 0)
+            {
+                currentSpeed -= moveAccel;
+                currentSpeed = Mathf.Clamp(currentSpeed, 0, Mathf.Infinity);
+            }
         }
         else
         {
             currentSpeed += moveAccel;
             currentSpeed = Mathf.Clamp(currentSpeed, 0, maxSpeed);
             lastDirection = input.GetAxis(moveBinding);
+            transform.right = lastDirection;
         }
         Vector3 movement = lastDirection * currentSpeed * Time.deltaTime;
         rigid.MovePosition(transform.position + movement);
-
     }
 }
