@@ -5,28 +5,24 @@ using UnityEngine;
 public class ProjectileAbility : BaseAbility
 {
     public GameObject projectile;
-    public float fireRate;
-    private float currentTimeToFire;
-    private bool canFire;
 
     public override void Execute(AbilityParameters parameters)
     {
         base.Execute(parameters);
-        if (canFire)
+        if (canActivate)
         {
-            //Quaternion rot = Quaternion.LookRotation(parameters.origin.right, parameters.origin.right);
             GameObject newProj = Instantiate(projectile, parameters.origin.position, Quaternion.identity);
             newProj.transform.right = parameters.origin.right;
-            currentTimeToFire = fireRate;
+            currentActivationRate = activationRate;
         }
     }
     public override void UpdateAbility()
     {
         base.UpdateAbility();
-        if(currentTimeToFire > 0)
+        if(currentActivationRate > 0)
         {
-            currentTimeToFire -= Time.deltaTime;
+            currentActivationRate -= Time.deltaTime;
         }
-        canFire = currentTimeToFire <= 0;
+        canActivate = currentActivationRate <= 0;
     }
 }

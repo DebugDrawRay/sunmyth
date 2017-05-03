@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class BaseAbility : ScriptableObject
 {
+    [Header("Activation")]
+    public float activationRate;
+    protected float currentActivationRate;
+    protected bool canActivate;
+
     public virtual void Execute(AbilityParameters parameters) { }
     public virtual void UpdateAbility() { }
 

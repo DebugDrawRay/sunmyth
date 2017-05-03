@@ -17,6 +17,7 @@ public class PlayerController : InputBus
         input.SetAxis("Move", moveVect);
         input.SetButton("Jump", controller.jump.WasPressed);
         input.SetButton("Shoot", controller.shoot.IsPressed);
+        input.SetButton("Melee", controller.melee.WasPressed);
         UpdateActions(input);
     }
     

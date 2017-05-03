@@ -15,6 +15,16 @@ public class CreateAsset
         return asset;
     }
 
+    [MenuItem("Assets/Create/Abilities/Melee")]
+    public static MeleeAbility CreateMeleeAbility()
+    {
+        MeleeAbility asset = ScriptableObject.CreateInstance<MeleeAbility>();
+
+        AssetDatabase.CreateAsset(asset, GetSelectedPathOrFallback() + "/NewMeleeAbility.asset");
+        AssetDatabase.SaveAssets();
+        return asset;
+    }
+
     public static string GetSelectedPathOrFallback()
     {
         string path = "Assets";

@@ -35,12 +35,10 @@ public class JumpController : ActionController
     }
     void Update()
     {
-        Debug.Log(grounded);
         if(grounded && jumping)
         {
             jumping = false;
         }
-        //CheckJump();
     }
 
     void CheckJump()
