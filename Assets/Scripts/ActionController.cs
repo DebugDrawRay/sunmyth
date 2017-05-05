@@ -4,16 +4,29 @@ using UnityEngine;
 
 public class ActionController : MonoBehaviour
 {
+    public bool fixedUpdate = false;
+
     protected virtual void Awake()
     {
         if(GetComponent<InputBus>())
         {
-            GetComponent<InputBus>().Subscribe(Action);
+            if (fixedUpdate)
+            {
+                GetComponent<InputBus>().SubscribePhysics(Action);
+            }
+            else
+            {
+                GetComponent<InputBus>().Subscribe(Action);
+            }
         }
     }
     protected virtual void OnDestroy()
     {
-        if (GetComponent<InputBus>())
+        if (fixedUpdate)
+        {
+            GetComponent<InputBus>().UnsubscribePhysics(Action);
+        }
+        else
         {
             GetComponent<InputBus>().Unsubscribe(Action);
         }

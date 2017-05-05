@@ -7,6 +7,7 @@ public class InputBus : MonoBehaviour
     protected InputSource input;
     public delegate void ActionContainer(InputSource input);
     private ActionContainer Actions;
+    private ActionContainer PhysicsActions;
 
     public void Subscribe(ActionContainer action)
     {
@@ -21,6 +22,22 @@ public class InputBus : MonoBehaviour
         if(Actions != null)
         {
             Actions(input);
+        }
+    }
+
+    public void SubscribePhysics(ActionContainer action)
+    {
+        PhysicsActions += action;
+    }
+    public void UnsubscribePhysics(ActionContainer action)
+    {
+        PhysicsActions -= action;
+    }
+    protected void UpdatePhysicsActions(InputSource input)
+    {
+        if (PhysicsActions != null)
+        {
+            PhysicsActions(input);
         }
     }
 }

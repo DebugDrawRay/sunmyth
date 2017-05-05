@@ -33,19 +33,12 @@ public class JumpController : ActionController
     {
         rigid = GetComponent<Rigidbody>();
     }
+
     void Update()
     {
         if(grounded && jumping)
         {
             jumping = false;
-        }
-    }
-
-    void CheckJump()
-    {
-        if(jumping)
-        {
-            rigid.AddForce(transform.up * jumpStrength);
         }
     }
 
@@ -55,41 +48,6 @@ public class JumpController : ActionController
         {
             rigid.AddForce(transform.up * jumpStrength);
             jumping = true;
-            //StartCoroutine(ShortJump(input, shortJumpLength));
         }
-    }
-
-    IEnumerator ShortJump(InputSource input, float time)
-    {
-        jumping = true;
-        yield return new WaitForSeconds(time);
-        if (input.GetButton(jumpBinding))
-        {
-            StartCoroutine(MidJump(input, midJumpLength));
-        }
-        else
-        {
-            jumping = false;
-        }
-        
-    }
-    IEnumerator MidJump(InputSource input, float time)
-    {
-        jumping = true;
-        yield return new WaitForSeconds(time);
-        if (input.GetButton(jumpBinding))
-        {
-            StartCoroutine(FullJump(input, fullJumpLength));
-        }
-        else
-        {
-            jumping = false;
-        }
-    }
-    IEnumerator FullJump(InputSource input, float time)
-    {
-        jumping = true;
-        yield return new WaitForSeconds(time);
-        jumping = false;
     }
 }

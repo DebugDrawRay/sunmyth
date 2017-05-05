@@ -12,7 +12,7 @@ public class TwoAxisMovement : ActionController
     public float moveAccel = .1f;
 
     private Vector3 lastDirection;
-    private float currentSpeed;
+    private float currentSpeed = 10;
     private Rigidbody rigid;
 
     protected override void Awake()
@@ -36,9 +36,9 @@ public class TwoAxisMovement : ActionController
             currentSpeed += moveAccel;
             currentSpeed = Mathf.Clamp(currentSpeed, 0, maxSpeed);
             lastDirection = input.GetAxis(moveBinding);
-            transform.right = lastDirection;
+            transform.right = input.GetAxis(moveBinding);
         }
-        Vector3 movement = lastDirection * currentSpeed * Time.deltaTime;
-        rigid.MovePosition(transform.position + movement);
+        Vector3 movement = transform.right * currentSpeed;
+        rigid.MovePosition(transform.position + movement * Time.deltaTime);
     }
 }

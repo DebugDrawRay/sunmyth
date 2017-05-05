@@ -23,7 +23,7 @@ namespace Cinemachine.Utility
 
                 float maxWidth = Mathf.Min(Screen.width - kPadding, size.x);
                 float left = Screen.width * 0.5f - maxWidth * 0.5f;
-                float top = Screen.height * 0.5f - halfSize.y;
+                float top = Screen.height * 0.4f - halfSize.y;
 
                 Rect windowRect = new Rect(left, top, maxWidth, size.y);
                 GUILayout.Window(400, windowRect, (id) => DrawWindow(id, maxWidth), m_Title);
