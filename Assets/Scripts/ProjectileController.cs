@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class ProjectileController : MonoBehaviour
+public class ProjectileController : InteractionSource
 {
     public float speed;
     public float lifetime = 2f;
-    public bool destroyOnContact = true;
     private Rigidbody rigid
     {
         get
@@ -19,12 +18,5 @@ public class ProjectileController : MonoBehaviour
     {
         rigid.AddForce(transform.right * speed, ForceMode.Impulse);
         Destroy(gameObject, lifetime);
-    }
-    void OnTriggerEnter(Collider hit)
-    {
-        if (destroyOnContact)
-        {
-            Destroy(gameObject);
-        }
     }
 }
