@@ -6,6 +6,8 @@ public class PlayerController : InputBus
 {
     private PlayerActions controller;
 
+    public static PlayerController instance;
+
     void Awake()
     {
         controller = PlayerActions.BindAll();
@@ -15,6 +17,12 @@ public class PlayerController : InputBus
         input.SetButton("Jump", false);
         input.SetButton("Shoot", false);
         input.SetButton("Melee", false);
+
+        if(instance != null)
+        {
+            Destroy(gameObject);
+        }
+        instance = this;
     }
     void Update()
     {

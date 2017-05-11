@@ -6,10 +6,11 @@ public interface IInformationRelay
 {
     RelayData GetInformation();
 }
-
+[System.Serializable]
 public class RelayData
 {
     public Vector3 positionData;
+    public bool isTriggered;
     public int integerData;
     public float floatData;
 } 

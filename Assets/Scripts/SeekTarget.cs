@@ -6,18 +6,34 @@ public class SeekTarget : MonoBehaviour, IInformationRelay
 {
     public bool useVision;
     public float trackingDistance;
+
     public LayerMask visionLayers;
     public LayerMask nonVisionLayers;
-    private RelayData targetData;
 
-    private void Update()
+    public string targetTag = "Player";
+    private GameObject[] targets
     {
-        targetData = CheckForTarget();
+        get
+        {
+            return GameObject.FindGameObjectsWithTag(targetTag);
+        }
     }
-
-    
     public RelayData GetInformation()
     {
-        return targetData;
+        RelayData data = new RelayData();
+        LayerMask mask = nonVisionLayers;
+        if(useVision)
+        {
+            mask = visionLayers;
+        }
+
+        //vvv Fucking change this vvv
+        GameObject target = targets[0];
+        Vector3 targetDir = target.transform.position - transform.position;
+        Ray targeting = new Ray(transform.position, targetDir);
+
+        data.isTriggered = Physics.Raycast(targeting, trackingDistance, mask);
+        data.positionData = target.transform.position;
+        return data;
     }
 }
