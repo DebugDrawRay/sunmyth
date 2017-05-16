@@ -9,7 +9,7 @@ public interface IInformationRelay
 [System.Serializable]
 public class RelayData
 {
-    public Vector3 positionData;
+    public Transform positionData;
     public bool isTriggered;
     public int integerData;
     public float floatData;
