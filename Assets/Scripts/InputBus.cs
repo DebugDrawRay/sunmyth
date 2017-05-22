@@ -79,7 +79,7 @@ public class InputSource
         }
         else
         {
-            Debug.LogError("Dude you didn't add this to the dictionary");
+            Debug.LogWarning("Dude you didn't add this to the dictionary");
             return Vector3.zero;
         }
     }
@@ -92,7 +92,7 @@ public class InputSource
         }
         else
         {
-            Debug.LogError("Dude you didn't add this to the dictionary");
+            Debug.LogWarning("Dude you didn't add this to the dictionary");
             return false;
         }
     }

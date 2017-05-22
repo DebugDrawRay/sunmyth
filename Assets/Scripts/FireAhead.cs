@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveWithinRange : ScriptedAction
+public class FireAhead : ScriptedAction
 {
+
     [Header("Movement Properties")]
     public float targetRange = 1.5f;
     public string moveInput;
@@ -19,7 +20,7 @@ public class MoveWithinRange : ScriptedAction
 
         Vector3 axis = new Vector3(1, 0, 0);
 
-        if(target.position.x < actionTarget.transform.position.x)
+        if (target.position.x < actionTarget.transform.position.x)
         {
             axis = -axis;
         }

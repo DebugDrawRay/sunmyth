@@ -5,6 +5,10 @@ using System.IO;
 [System.Serializable]
 public class CreateAsset
 {
+    /// <summary>
+    /// Abilities
+    /// </summary>
+    /// <returns></returns>
     [MenuItem("Assets/Create/Abilities/Projectile")]
     public static ProjectileAbility CreateProjectileAbility()
     {
@@ -21,6 +25,20 @@ public class CreateAsset
         MeleeAbility asset = ScriptableObject.CreateInstance<MeleeAbility>();
 
         AssetDatabase.CreateAsset(asset, GetSelectedPathOrFallback() + "/NewMeleeAbility.asset");
+        AssetDatabase.SaveAssets();
+        return asset;
+    }
+
+    /// <summary>
+    /// Scripted Actions
+    /// </summary>
+    /// <returns></returns>
+    [MenuItem("Assets/Create/Scripted Action/MoveWithinRange")]
+    public static MoveWithinRange CreateMoveWithinRange()
+    {
+        MoveWithinRange asset = ScriptableObject.CreateInstance<MoveWithinRange>();
+
+        AssetDatabase.CreateAsset(asset, GetSelectedPathOrFallback() + "/MoveWithinRange.asset");
         AssetDatabase.SaveAssets();
         return asset;
     }

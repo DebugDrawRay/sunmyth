@@ -33,7 +33,7 @@ public class SeekTarget : MonoBehaviour, IInformationRelay
         Ray targeting = new Ray(transform.position, targetDir);
 
         data.isTriggered = Physics.Raycast(targeting, trackingDistance, mask);
-        data.positionData = target.transform.position;
+        //data.positionData = target.transform.position;
         return data;
     }
 }

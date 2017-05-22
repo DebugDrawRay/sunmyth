@@ -18,7 +18,6 @@ public class TwoAxisMovement : ActionController
     protected override void Awake()
     {
         base.Awake();
-        Debug.Log("This");
         rigid = GetComponent<Rigidbody>();
     }
     protected override void Action(InputSource input)

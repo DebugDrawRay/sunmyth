@@ -68,8 +68,10 @@ public class ScriptedAction : ScriptableObject
         Vector3 targetDir = target.transform.position - observer.transform.position;
         Ray targeting = new Ray(observer.transform.position, targetDir);
 
+        Debug.DrawRay(observer.transform.position, targetDir);
         data.isTriggered = Physics.Raycast(targeting, trackingDistance, mask);
         data.positionData = target.transform;
+        Debug.Log(data.isTriggered);
         return data;
     }
 }
