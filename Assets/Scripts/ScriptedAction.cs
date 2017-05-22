@@ -71,7 +71,7 @@ public class ScriptedAction : ScriptableObject
         Debug.DrawRay(observer.transform.position, targetDir);
         data.isTriggered = Physics.Raycast(targeting, trackingDistance, mask);
         data.positionData = target.transform;
-        Debug.Log(data.isTriggered);
+
         return data;
     }
 }

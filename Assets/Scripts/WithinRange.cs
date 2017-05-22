@@ -5,8 +5,4 @@ using UnityEngine;
 public class WithinRange : Requirement
 {
     public float targetRange;
-
-    public override bool Check(InputBus toCheck)
-    {
-    }
 }

@@ -42,6 +42,15 @@ public class CreateAsset
         AssetDatabase.SaveAssets();
         return asset;
     }
+    [MenuItem("Assets/Create/Scripted Action/TriggerAction")]
+    public static TriggerAction CreateTriggerAction()
+    {
+        TriggerAction asset = ScriptableObject.CreateInstance<TriggerAction>();
+
+        AssetDatabase.CreateAsset(asset, GetSelectedPathOrFallback() + "/TriggerAction.asset");
+        AssetDatabase.SaveAssets();
+        return asset;
+    }
 
     public static string GetSelectedPathOrFallback()
     {

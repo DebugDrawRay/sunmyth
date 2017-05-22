@@ -49,8 +49,8 @@ public class AiActorController : InputBus
 
     public void OnActionComplete()
     {
-        
         currentState = State.Idle;
+        currentAction = null;
     }
     public ScriptedAction AssessActions()
     {

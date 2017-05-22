@@ -7,15 +7,14 @@ public class JumpController : ActionController
 {
     [Header("Properties")]
     public string jumpBinding = "Jump";
-
-    public float shortJumpLength;
-    public float midJumpLength;
-    public float fullJumpLength;
-
     public float jumpStrength;
+    public float jumpFalloff = .5f;
 
     private bool jumping;
+    private float currentJumpStrength;
     private Rigidbody rigid;
+
+    private int frames;
 
     [Header("Grounding")]
     public LayerMask groundLayers;
@@ -32,6 +31,7 @@ public class JumpController : ActionController
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
+        currentJumpStrength = jumpStrength;
     }
 
     void Update()
@@ -44,10 +44,27 @@ public class JumpController : ActionController
 
     protected override void Action(InputSource input)
     {
-        if(input.GetButton(jumpBinding) && grounded)
+        if (input.GetButton(jumpBinding))
         {
-            rigid.AddForce(transform.up * jumpStrength);
-            jumping = true;
+            rigid.AddForce(transform.up * currentJumpStrength, ForceMode.VelocityChange);
+            currentJumpStrength -= jumpFalloff;
+            if (currentJumpStrength < 0f)
+            {
+                currentJumpStrength = 0;
+            }
         }
+        else
+        {
+            if (grounded)
+            {
+                currentJumpStrength = jumpStrength;
+            }
+        }
+
+        //if(input.GetButton(jumpBinding) && grounded)
+        //{
+        //    rigid.AddForce(transform.up * jumpStrength);
+        //    jumping = true;
+        //}
     }
 }
