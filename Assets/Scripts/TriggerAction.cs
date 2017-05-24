@@ -16,24 +16,36 @@ public class TriggerAction : ScriptedAction
     protected override bool CheckPrerequirements(InputBus actionTarget)
     {
         Transform target = FindTarget(actionTarget).positionData;
-        bool within = Vector3.Distance(actionTarget.transform.position, target.position) < vaildActionRange;
-        bool found = FindTarget(actionTarget).isTriggered;
-        return within && found;
+        if (target != null)
+        {
+            bool within = Vector3.Distance(actionTarget.transform.position, target.position) < vaildActionRange;
+            bool found = FindTarget(actionTarget).isTriggered;
+            return within && found;
+        }
+        return false;
     }
 
     public override void Execute(ActionCallback Callback, InputBus actionTarget)
     {
         Transform target = FindTarget(actionTarget).positionData;
-        ((AiActorController)actionTarget).UpdateInput(actionInput, true);
-
-        float facing = Mathf.Sign(actionTarget.transform.right.x);
-        float dir = Mathf.Sign((target.transform.position - actionTarget.transform.position).x);
-        if (alwaysFaceTarget && facing != dir)
+        if (target != null)
         {
-            actionTarget.transform.right = -actionTarget.transform.right;
-        }
+            ((AiActorController)actionTarget).UpdateInput(actionInput, true);
 
-        if (Vector3.Distance(actionTarget.transform.position, target.position) > vaildActionRange)
+            float facing = Mathf.Sign(actionTarget.transform.right.x);
+            float dir = Mathf.Sign((target.transform.position - actionTarget.transform.position).x);
+            if (alwaysFaceTarget && facing != dir)
+            {
+                actionTarget.transform.right = -actionTarget.transform.right;
+            }
+
+            if (Vector3.Distance(actionTarget.transform.position, target.position) > vaildActionRange)
+            {
+                ((AiActorController)actionTarget).UpdateInput(actionInput, false);
+                Callback();
+            }
+        }
+        else
         {
             ((AiActorController)actionTarget).UpdateInput(actionInput, false);
             Callback();

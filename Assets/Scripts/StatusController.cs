@@ -38,7 +38,7 @@ public class StatusController : MonoBehaviour
 
     private void Update()
     {
-        if(currentHealth <= 0)
+        if(currentHealth <= 0 && OnHealthZero != null)
         {
             OnHealthZero();
         }
@@ -47,7 +47,10 @@ public class StatusController : MonoBehaviour
     public void Damage(float damage)
     {
         currentHealth -= damage;
-        OnHealthDown();
+        if (OnHealthDown != null)
+        {
+            OnHealthDown();
+        }
     }
 
 }

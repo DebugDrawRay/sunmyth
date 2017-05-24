@@ -13,6 +13,7 @@ public class ProjectileAbility : BaseAbility
         {
             GameObject newProj = Instantiate(projectile, parameters.origin.position, Quaternion.identity);
             newProj.transform.right = parameters.origin.right;
+            newProj.layer = parameters.origin.gameObject.layer;
             currentActivationRate = activationRate;
         }
     }

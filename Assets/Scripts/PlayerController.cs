@@ -8,22 +8,33 @@ public class PlayerController : InputBus
 
     public static PlayerController instance;
 
-    void Awake()
+
+    protected override void Awake()
     {
+        base.Awake();
+
         controller = PlayerActions.BindAll();
         input = new InputSource();
 
+        InitializeInput();
+        InitializeInstance();
+    }
+    void InitializeInput()
+    {
         input.SetAxis("Move", Vector3.zero);
         input.SetButton("Jump", false);
         input.SetButton("Shoot", false);
         input.SetButton("Melee", false);
-
+    }
+    void InitializeInstance()
+    {
         if(instance != null)
         {
             Destroy(gameObject);
         }
         instance = this;
     }
+
     void Update()
     {
         UpdateInput();
@@ -41,5 +52,5 @@ public class PlayerController : InputBus
         input.SetButton("Shoot", controller.shoot.IsPressed);
         input.SetButton("Melee", controller.melee.WasPressed);
     }
-    
+  
 }

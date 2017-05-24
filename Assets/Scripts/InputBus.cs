@@ -9,6 +9,14 @@ public class InputBus : MonoBehaviour
     private ActionContainer Actions;
     private ActionContainer PhysicsActions;
 
+    private StatusController status
+    {
+        get
+        {
+            return GetComponent<StatusController>();
+        }
+    }
+
     public void Subscribe(ActionContainer action)
     {
         Actions += action;
@@ -39,6 +47,19 @@ public class InputBus : MonoBehaviour
         {
             PhysicsActions(input);
         }
+    }
+
+    protected virtual void Awake()
+    {
+        if (status)
+        {
+            status.SubscribeOnHealthZero(Kill);
+        }
+    }
+
+    protected virtual void Kill()
+    {
+        Destroy(gameObject);
     }
 }
 

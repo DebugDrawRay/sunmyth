@@ -15,8 +15,10 @@ public class AiActorController : InputBus
     }
     private State currentState;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         input = new InputSource();
     }
     private void Update()

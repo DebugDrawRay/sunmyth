@@ -64,14 +64,16 @@ public class ScriptedAction : ScriptableObject
         }
 
         //vvv Fucking change this vvv
-        GameObject target = targets[0];
-        Vector3 targetDir = target.transform.position - observer.transform.position;
-        Ray targeting = new Ray(observer.transform.position, targetDir);
+        if (targets.Length > 0)
+        {
+            GameObject target = targets[0];
+            Vector3 targetDir = target.transform.position - observer.transform.position;
+            Ray targeting = new Ray(observer.transform.position, targetDir);
 
-        Debug.DrawRay(observer.transform.position, targetDir);
-        data.isTriggered = Physics.Raycast(targeting, trackingDistance, mask);
-        data.positionData = target.transform;
-
+            Debug.DrawRay(observer.transform.position, targetDir);
+            data.isTriggered = Physics.Raycast(targeting, trackingDistance, mask);
+            data.positionData = target.transform;
+        }
         return data;
     }
 }

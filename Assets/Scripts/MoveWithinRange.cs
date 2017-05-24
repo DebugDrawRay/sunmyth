@@ -11,27 +11,39 @@ public class MoveWithinRange : ScriptedAction
     protected override bool CheckPrerequirements(InputBus actionTarget)
     {
         Transform target = FindTarget(actionTarget).positionData;
-        bool within = Vector3.Distance(actionTarget.transform.position, target.position) > targetRange;
-        bool found = FindTarget(actionTarget).isTriggered;
-        return within && found;
+        if (target != null)
+        {
+            bool within = Vector3.Distance(actionTarget.transform.position, target.position) > targetRange;
+            bool found = FindTarget(actionTarget).isTriggered;
+            return within && found;
+        }
+        return false;
     }
 
     public override void Execute(ActionCallback Callback, InputBus actionTarget)
     {
         Transform target = FindTarget(actionTarget).positionData;
-
-        Vector3 axis = new Vector3(1, 0, 0);
-
-        if(target.position.x < actionTarget.transform.position.x)
+        if (target != null)
         {
-            axis = -axis;
-        }
-        ((AiActorController)actionTarget).UpdateInput(moveInput, axis);
+            Vector3 axis = new Vector3(1, 0, 0);
 
-        if (Vector3.Distance(actionTarget.transform.position, target.position) < targetRange)
+            if (target.position.x < actionTarget.transform.position.x)
+            {
+                axis = -axis;
+            }
+            ((AiActorController)actionTarget).UpdateInput(moveInput, axis);
+
+            if (Vector3.Distance(actionTarget.transform.position, target.position) < targetRange)
+            {
+                ((AiActorController)actionTarget).UpdateInput(moveInput, Vector3.zero);
+                Callback();
+            }
+        }
+        else
         {
             ((AiActorController)actionTarget).UpdateInput(moveInput, Vector3.zero);
             Callback();
         }
+
     }
 }
