@@ -18,7 +18,7 @@ MonoBehaviour:
   priorityTargetTag: 
   maxDashDistance: 3
   dashTargetingOffset: 0
-  dashTime: 1
+  dashTime: 0.1
   dashTween:
     serializedVersion: 2
     m_Curve:

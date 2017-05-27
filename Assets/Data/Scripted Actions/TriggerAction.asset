@@ -22,7 +22,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   targetTag: Player
-  vaildActionRange: 5
+  vaildActionRange: 100
   actionInput: Shoot
   moveInput: Move
   alwaysFaceTarget: 1

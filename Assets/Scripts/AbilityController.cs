@@ -17,7 +17,9 @@ public class AbilityController : ActionController
     {
         foreach(AbilityContainer container in availableAbilities)
         {
-            container.ability.UpdateAbility();
+            BaseAbility.AbilityParameters param = new BaseAbility.AbilityParameters();
+            param.origin = transform;
+            container.ability.UpdateAbility(param);
         }
     }
 

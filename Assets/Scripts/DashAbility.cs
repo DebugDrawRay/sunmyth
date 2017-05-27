@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 public class DashAbility : BaseAbility
 {
     public LayerMask validTargetLayers;
@@ -10,6 +10,9 @@ public class DashAbility : BaseAbility
     public float dashTargetingOffset;
     public float dashTime;
     public AnimationCurve dashTween;
+
+    public float floatTime;
+    private float currentFloatTime;
 
     public override void Execute(AbilityParameters parameters)
     {
@@ -43,8 +46,23 @@ public class DashAbility : BaseAbility
 
     void Dash(Transform target, Vector3 to)
     {
+        target.DOMove(to, dashTime).SetEase(dashTween);
+        currentActivationRate = activationRate;
+        currentFloatTime = floatTime;
     }
 
+    public override void UpdateAbility(AbilityParameters parameters = null)
+    {
+        base.UpdateAbility(parameters);
+        parameters.origin.GetComponent<ConstantForce>().enabled = currentFloatTime <= 0;
+
+        if (currentFloatTime > 0)
+        {
+            parameters.origin.GetComponent<Rigidbody>().Sleep();
+            currentFloatTime -= Time.deltaTime;
+        }
+
+    }
     IEnumerator DashAction(Transform target, Vector3 to)
     {
         float elapsedTime = 0;

@@ -10,7 +10,7 @@ public class BaseAbility : ScriptableObject
     protected bool canActivate;
 
     public virtual void Execute(AbilityParameters parameters) { }
-    public virtual void UpdateAbility()
+    public virtual void UpdateAbility(AbilityParameters parameters = null)
     {
         UpdateActivationRate();
     }

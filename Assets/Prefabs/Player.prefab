@@ -152,6 +152,8 @@ MonoBehaviour:
   fixedUpdate: 1
   moveBinding: Move
   maxSpeed: 10
+  trackX: 1
+  trackY: 0
   moveAccel: 0.9
 --- !u!114 &114637721097937280
 MonoBehaviour:

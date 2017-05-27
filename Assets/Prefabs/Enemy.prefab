@@ -69,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1771203174853902}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4.56, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4257646782919640}
@@ -83,7 +83,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1771203174853902}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 100
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 1
@@ -126,9 +126,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fixedUpdate: 0
+  directionInput: Move
   availableAbilities:
   - controlName: Shoot
-    ability: {fileID: 11400000, guid: 68d37876346ab434dadc7cbb1868171c, type: 2}
+    ability: {fileID: 11400000, guid: bfe60b7fc7b46614d9ec91c49d55167f, type: 2}
 --- !u!114 &114583064272226600
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -169,6 +170,8 @@ MonoBehaviour:
   fixedUpdate: 1
   moveBinding: Move
   maxSpeed: 5
+  trackX: 0
+  trackY: 0
   moveAccel: 0.25
 --- !u!212 &212594025961469014
 SpriteRenderer:

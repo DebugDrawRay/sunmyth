@@ -8,6 +8,7 @@ public class TwoAxisMovement : ActionController
 {
     public string moveBinding = "Move";
     public float maxSpeed = 1;
+    public bool trackX = true, trackY = true;
     [Tooltip("Time to max/zero speed")]
     public float moveAccel = .1f;
 
@@ -22,7 +23,17 @@ public class TwoAxisMovement : ActionController
     }
     protected override void Action(InputSource input)
     {
-        if (input.GetAxis(moveBinding) == Vector3.zero)
+        Vector3 axisInput = input.GetAxis(moveBinding);
+        if(!trackX)
+        {
+            axisInput.x = 0;
+        }
+        if(!trackY)
+        {
+            axisInput.y = 0;
+        }
+
+        if (axisInput == Vector3.zero)
         {
             if (currentSpeed > 0)
             {
@@ -34,8 +45,8 @@ public class TwoAxisMovement : ActionController
         {
             currentSpeed += moveAccel;
             currentSpeed = Mathf.Clamp(currentSpeed, 0, maxSpeed);
-            lastDirection = input.GetAxis(moveBinding);
-            transform.right = input.GetAxis(moveBinding);
+            lastDirection = axisInput;
+            transform.right = axisInput;
         }
         Vector3 movement = transform.right * currentSpeed;
         rigid.MovePosition(transform.position + movement * Time.deltaTime);
