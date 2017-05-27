@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AbilityController : ActionController
 {
+    public string directionInput = "Move";
     [System.Serializable]
     public class AbilityContainer
     {
@@ -25,6 +26,7 @@ public class AbilityController : ActionController
         base.Action(input);
         BaseAbility.AbilityParameters param = new BaseAbility.AbilityParameters();
         param.origin = transform;
+        param.heldDirection = input.GetAxis(directionInput);
 
         foreach (AbilityContainer container in availableAbilities)
         {

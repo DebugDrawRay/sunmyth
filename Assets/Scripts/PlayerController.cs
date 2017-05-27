@@ -25,6 +25,7 @@ public class PlayerController : InputBus
         input.SetButton("Jump", false);
         input.SetButton("Shoot", false);
         input.SetButton("Melee", false);
+        input.SetButton("Dash", false);
     }
     void InitializeInstance()
     {
@@ -51,6 +52,7 @@ public class PlayerController : InputBus
         input.SetButton("Jump", controller.jump.IsPressed);
         input.SetButton("Shoot", controller.shoot.IsPressed);
         input.SetButton("Melee", controller.melee.WasPressed);
+        input.SetButton("Dash", controller.dash.WasPressed);
     }
   
 }

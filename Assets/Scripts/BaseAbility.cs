@@ -10,10 +10,22 @@ public class BaseAbility : ScriptableObject
     protected bool canActivate;
 
     public virtual void Execute(AbilityParameters parameters) { }
-    public virtual void UpdateAbility() { }
+    public virtual void UpdateAbility()
+    {
+        UpdateActivationRate();
+    }
 
+    public void UpdateActivationRate()
+    {
+        if (currentActivationRate > 0)
+        {
+            currentActivationRate -= Time.deltaTime;
+        }
+        canActivate = currentActivationRate <= 0;
+    }
     public class AbilityParameters
     {
         public Transform origin;
+        public Vector3 heldDirection;
     }
 }

@@ -29,6 +29,15 @@ public class CreateAsset
         return asset;
     }
 
+    [MenuItem("Assets/Create/Abilities/Dash")]
+    public static DashAbility CreateDashAbility()
+    {
+        DashAbility asset = ScriptableObject.CreateInstance<DashAbility>();
+
+        AssetDatabase.CreateAsset(asset, GetSelectedPathOrFallback() + "/NewDashAbility.asset");
+        AssetDatabase.SaveAssets();
+        return asset;
+    }
     /// <summary>
     /// Scripted Actions
     /// </summary>

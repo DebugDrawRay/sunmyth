@@ -17,13 +17,4 @@ public class MeleeAbility : BaseAbility
             currentActivationRate = activationRate;
         }
     }
-    public override void UpdateAbility()
-    {
-        base.UpdateAbility();
-        if (currentActivationRate > 0)
-        {
-            currentActivationRate -= Time.deltaTime;
-        }
-        canActivate = currentActivationRate <= 0;
-    }
 }
