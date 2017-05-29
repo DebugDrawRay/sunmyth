@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e036ef3d3ccd1794780d7a9f22355713, type: 3}
   m_Name: EnemyGun
   m_EditorClassIdentifier: 
-  activationRate: 0.5
+  activationRate: 1
   projectile: {fileID: 1129645348242986, guid: 2b05dc54683eb354ea3183b7b77d1f8e, type: 2}

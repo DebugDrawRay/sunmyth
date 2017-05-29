@@ -100,7 +100,7 @@ public class InputSource
         }
         else
         {
-            Debug.LogWarning("Dude you didn't add this to the dictionary");
+            Debug.LogWarning(axis + " Not Found");
             return Vector3.zero;
         }
     }
@@ -113,7 +113,7 @@ public class InputSource
         }
         else
         {
-            Debug.LogWarning("Dude you didn't add this to the dictionary");
+            Debug.LogWarning(button + " Not Found");
             return false;
         }
     }

@@ -54,5 +54,4 @@ public class PlayerController : InputBus
         input.SetButton("Melee", controller.melee.WasPressed);
         input.SetButton("Dash", controller.dash.WasPressed);
     }
-  
 }
