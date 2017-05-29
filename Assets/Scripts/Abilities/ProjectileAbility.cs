@@ -9,7 +9,7 @@ public class ProjectileAbility : BaseAbility
     public override void Execute(AbilityParameters parameters)
     {
         base.Execute(parameters);
-        if (canActivate)
+        if (canActivate && parameters.heldButton)
         {
             GameObject newProj = Instantiate(projectile, parameters.origin.position, Quaternion.identity);
             newProj.transform.right = parameters.origin.right;

@@ -27,7 +27,7 @@ public class DashAbility : BaseAbility
     public override void Execute(AbilityParameters parameters)
     {
         base.Execute(parameters);
-        if(canActivate)
+        if(canActivate && parameters.heldButton)
         {
             Collider[] targets = Physics.OverlapSphere(parameters.origin.position, maxDashDistance, validTargetLayers);
 

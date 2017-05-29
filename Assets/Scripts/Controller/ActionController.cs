@@ -10,26 +10,18 @@ public class ActionController : MonoBehaviour
     {
         if(GetComponent<InputBus>())
         {
-            if (fixedUpdate)
-            {
-                GetComponent<InputBus>().SubscribePhysics(Action);
-            }
-            else
-            {
-                GetComponent<InputBus>().Subscribe(Action);
-            }
+            GetComponent<InputBus>().SubscribePhysics(FixedAction);
+            GetComponent<InputBus>().Subscribe(Action);
         }
     }
     protected virtual void OnDestroy()
     {
-        if (fixedUpdate)
+        if (GetComponent<InputBus>())
         {
-            GetComponent<InputBus>().UnsubscribePhysics(Action);
-        }
-        else
-        {
+            GetComponent<InputBus>().UnsubscribePhysics(FixedAction);
             GetComponent<InputBus>().Unsubscribe(Action);
         }
     }
     protected virtual void Action(InputSource input) { }
+    protected virtual void FixedAction(InputSource input) { }
 }

@@ -27,5 +27,6 @@ public class BaseAbility : ScriptableObject
     {
         public Transform origin;
         public Vector3 heldDirection;
+        public bool heldButton;
     }
 }

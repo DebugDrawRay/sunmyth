@@ -8,7 +8,6 @@ public class PlayerController : InputBus
 
     public static PlayerController instance;
 
-
     protected override void Awake()
     {
         base.Awake();

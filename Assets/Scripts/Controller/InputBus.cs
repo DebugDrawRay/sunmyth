@@ -9,6 +9,14 @@ public class InputBus : MonoBehaviour
     private ActionContainer Actions;
     private ActionContainer PhysicsActions;
 
+    public enum State
+    {
+        None,
+        AcceptInput,
+        Pause
+    }
+    public State currentState;
+
     private StatusController status
     {
         get
@@ -60,6 +68,11 @@ public class InputBus : MonoBehaviour
     protected virtual void Kill()
     {
         Destroy(gameObject);
+    }
+
+    public void ChangeState(State newState)
+    {
+        currentState = newState;
     }
 }
 

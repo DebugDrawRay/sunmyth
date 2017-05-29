@@ -9,6 +9,24 @@ public class CreateAsset
     /// Abilities
     /// </summary>
     /// <returns></returns>
+    [MenuItem("Assets/Create/Abilities/Two Axis Move")]
+    public static TwoAxisMoveAbility CreateTwoAxisMoveAbility()
+    {
+        TwoAxisMoveAbility asset = ScriptableObject.CreateInstance<TwoAxisMoveAbility>();
+
+        AssetDatabase.CreateAsset(asset, GetSelectedPathOrFallback() + "/NewTwoAxisMoveAbility.asset");
+        AssetDatabase.SaveAssets();
+        return asset;
+    }
+    [MenuItem("Assets/Create/Abilities/Jump Ability")]
+    public static JumpAbility CreateJumpAbility()
+    {
+        JumpAbility asset = ScriptableObject.CreateInstance<JumpAbility>();
+
+        AssetDatabase.CreateAsset(asset, GetSelectedPathOrFallback() + "/NewJumpAbility.asset");
+        AssetDatabase.SaveAssets();
+        return asset;
+    }
     [MenuItem("Assets/Create/Abilities/Projectile")]
     public static ProjectileAbility CreateProjectileAbility()
     {
