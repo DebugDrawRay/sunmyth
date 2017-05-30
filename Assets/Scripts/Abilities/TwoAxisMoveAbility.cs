@@ -39,6 +39,7 @@ public class TwoAxisMoveAbility : BaseAbility
             lastDirection = axisInput;
             parameters.origin.right = axisInput;
         }
+        isRunning = axisInput != Vector3.zero;
         Vector3 movement = parameters.origin.right * currentSpeed;
         parameters.origin.GetComponent<Rigidbody>().MovePosition(parameters.origin.position + movement * Time.deltaTime);
     }

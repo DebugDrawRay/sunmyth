@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef3d98c6105203a42bfc2d62050b0876, type: 3}
   m_Name: Dash
   m_EditorClassIdentifier: 
-  activationRate: 0
+  activationRate: 0.1
   validTargetLayers:
     serializedVersion: 2
     m_Bits: 2048

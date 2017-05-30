@@ -17,15 +17,20 @@ public class AbilityController : ActionController
         public Type controlType;
         public bool fixedUpdate;
         public BaseAbility ability;
+        public List<string> mutedAbilities;
+        [HideInInspector]
+        public bool isRunning;
     }
     public AbilityContainer[] availableAbilities;
-
+     
     void Update()
     {
         foreach(AbilityContainer container in availableAbilities)
         {
-            BaseAbility.AbilityParameters param = new BaseAbility.AbilityParameters();
-            param.origin = transform;
+            BaseAbility.AbilityParameters param = new BaseAbility.AbilityParameters()
+            {
+                origin = transform
+            };
             container.ability.UpdateAbility(param);
         }
     }
@@ -33,12 +38,13 @@ public class AbilityController : ActionController
     protected override void Action(InputSource input)
     {
         base.Action(input);
-        BaseAbility.AbilityParameters param = new BaseAbility.AbilityParameters();
-        param.origin = transform;
-
+        BaseAbility.AbilityParameters param = new BaseAbility.AbilityParameters()
+        {
+            origin = transform
+        };
         foreach (AbilityContainer container in availableAbilities)
         {
-            if (!container.fixedUpdate)
+            if (!container.fixedUpdate && !CheckMuted(container.controlName))
             {
                 switch (container.controlType)
                 {
@@ -59,12 +65,13 @@ public class AbilityController : ActionController
     protected override void FixedAction(InputSource input)
     {
         base.Action(input);
-        BaseAbility.AbilityParameters param = new BaseAbility.AbilityParameters();
-        param.origin = transform;
-
+        BaseAbility.AbilityParameters param = new BaseAbility.AbilityParameters()
+        {
+            origin = transform
+        };
         foreach (AbilityContainer container in availableAbilities)
         {
-            if (container.fixedUpdate)
+            if (container.fixedUpdate && !CheckMuted(container.controlName))
             {
                 switch (container.controlType)
                 {
@@ -80,5 +87,38 @@ public class AbilityController : ActionController
                 }
             }
         }
+    }
+
+    bool CheckMuted(string controlName)
+    {
+        BaseAbility.AbilityParameters param = new BaseAbility.AbilityParameters()
+        {
+            origin = transform
+        };
+        foreach (AbilityContainer container in availableAbilities)
+        {
+            if(container.ability.isRunning && container.mutedAbilities.Contains(controlName))
+            {
+                switch (container.controlType)
+                {
+                    case AbilityContainer.Type.Axis:
+                        param.heldDirection = Vector3.zero;
+                        container.ability.Execute(param);
+                        break;
+                    case AbilityContainer.Type.Button:
+                        param.heldDirection = Vector3.zero;
+                        param.heldButton = false;
+                        container.ability.Execute(param);
+                        break;
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    void SetIsRunning(AbilityContainer container, bool isRunning)
+    {
+        container.isRunning = isRunning;
     }
 }

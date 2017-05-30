@@ -46,7 +46,7 @@ public class JumpController : ActionController
     {
         if (input.GetButton(jumpBinding))
         {
-            rigid.AddForce(transform.up * currentJumpStrength, ForceMode.VelocityChange);
+            //rigid.AddForce(transform.up * currentJumpStrength, ForceMode.VelocityChange);
             currentJumpStrength -= jumpFalloff;
             if (currentJumpStrength < 0f)
             {

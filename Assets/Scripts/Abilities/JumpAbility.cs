@@ -25,6 +25,7 @@ public class JumpAbility : BaseAbility
         {
             jumping = false;
         }
+        isRunning = jumping;
     }
 
     public override void Execute(AbilityParameters parameters)

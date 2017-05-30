@@ -39,6 +39,7 @@ public class PlayerController : InputBus
     {
         UpdateInput();
         UpdateActions(input);
+        Debug.Log("Velocity " + GetComponent<Rigidbody>().velocity);
     }
     void FixedUpdate()
     {

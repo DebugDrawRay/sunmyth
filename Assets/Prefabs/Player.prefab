@@ -38,7 +38,6 @@ GameObject:
   - component: {fileID: 114198653978357666}
   - component: {fileID: 54553181079554592}
   - component: {fileID: 65056722008683774}
-  - component: {fileID: 114637721097937280}
   - component: {fileID: 75725020749884078}
   - component: {fileID: 114907152389624976}
   - component: {fileID: 114158667039020368}
@@ -138,25 +137,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
---- !u!114 &114637721097937280
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1789258067565238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1ec9349324d61e49b9206e1e82ad892, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fixedUpdate: 1
-  jumpBinding: Jump
-  jumpStrength: 6
-  jumpFalloff: 1
-  groundLayers:
-    serializedVersion: 2
-    m_Bits: 256
-  groundRayLength: 0.5
 --- !u!114 &114907152389624976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -175,22 +155,34 @@ MonoBehaviour:
     controlType: 0
     fixedUpdate: 0
     ability: {fileID: 11400000, guid: 68d37876346ab434dadc7cbb1868171c, type: 2}
+    mutedAbilities: []
+    isRunning: 0
   - controlName: Melee
     controlType: 0
     fixedUpdate: 0
     ability: {fileID: 11400000, guid: 923d63c55ec5fd442aa6f176cad125d5, type: 2}
+    mutedAbilities: []
+    isRunning: 0
   - controlName: Dash
     controlType: 0
     fixedUpdate: 0
     ability: {fileID: 11400000, guid: 56443c816dea65148a966fb5f1c77d91, type: 2}
+    mutedAbilities:
+    - Move
+    - Jump
+    isRunning: 0
   - controlName: Move
     controlType: 1
     fixedUpdate: 1
     ability: {fileID: 11400000, guid: f25816b5ea70d414f80ae00346dfc855, type: 2}
+    mutedAbilities: []
+    isRunning: 0
   - controlName: Jump
     controlType: 0
-    fixedUpdate: 0
+    fixedUpdate: 1
     ability: {fileID: 11400000, guid: ea31ac9880d31f845bf1932a902d3553, type: 2}
+    mutedAbilities: []
+    isRunning: 0
 --- !u!212 &212414356600384400
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -69,23 +69,25 @@ public class DashAbility : BaseAbility
     {
         if (canDash)
         {
+            isRunning = true;
             if (dashTween != null)
             {
                 dashTween.Kill();
             }
             canDash = false;
-            dashTween = target.DOMove(to, dashTime).SetEase(dashEase);
+            dashTween = target.GetComponent<Rigidbody>().DOMove(to, dashTime).SetEase(dashEase).OnComplete(() => isRunning = false);
             currentActivationRate = activationRate;
         }
     }
     void DashTowards(Transform target, Vector3 to)
     {
-        if(dashTween != null)
+        isRunning = true;
+        if (dashTween != null)
         {
             dashTween.Kill();
         }
         currentFloatTime = 0;
-        dashTween = target.DOMove(to, dashTime).SetEase(dashEase).OnComplete(() => currentFloatTime = floatTime);
+        dashTween = target.GetComponent<Rigidbody>().DOMove(to, dashTime).SetEase(dashEase).OnComplete(CompleteTargetDash);
         currentActivationRate = activationRate;
     }
 
@@ -93,16 +95,26 @@ public class DashAbility : BaseAbility
     {
         base.UpdateAbility(parameters);
 
-        parameters.origin.GetComponent<ConstantForce>().enabled = currentFloatTime <= 0;
-        parameters.origin.GetComponent<Rigidbody>().isKinematic = currentFloatTime > 0;
         if (currentFloatTime > 0)
         {
+            parameters.origin.GetComponent<Rigidbody>().velocity = Vector3.zero;
             currentFloatTime -= Time.deltaTime;
         }
-        if(!canDash)
+        parameters.origin.GetComponent<ConstantForce>().enabled = currentFloatTime <= 0;
+        parameters.origin.GetComponent<Rigidbody>().isKinematic = currentFloatTime > 0;
+
+        if (!canDash)
         {
             Ray groundRay = new Ray(parameters.origin.position, -parameters.origin.up);
             canDash = Physics.Raycast(groundRay, groundRayLength, groundLayers);
         }
+
+        Debug.Log(dashTween == null);
+    }
+
+    void CompleteTargetDash()
+    {
+        isRunning = false;
+        currentFloatTime = floatTime;
     }
 }

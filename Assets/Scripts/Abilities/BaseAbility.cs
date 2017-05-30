@@ -8,6 +8,11 @@ public class BaseAbility : ScriptableObject
     public float activationRate;
     protected float currentActivationRate;
     protected bool canActivate;
+    public bool isRunning
+    {
+        get;
+        protected set;
+    }
 
     public virtual void Execute(AbilityParameters parameters) { }
     public virtual void UpdateAbility(AbilityParameters parameters = null)

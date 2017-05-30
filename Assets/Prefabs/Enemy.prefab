@@ -68,8 +68,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1771203174853902}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.56, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 8.41, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4257646782919640}
@@ -97,7 +97,7 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1771203174853902}
-  m_Material: {fileID: 13400000, guid: f41b38f65b49cac47b55aa285056fea8, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -129,6 +129,8 @@ MonoBehaviour:
   directionInput: Move
   availableAbilities:
   - controlName: Shoot
+    controlType: 0
+    fixedUpdate: 0
     ability: {fileID: 11400000, guid: bfe60b7fc7b46614d9ec91c49d55167f, type: 2}
 --- !u!114 &114583064272226600
 MonoBehaviour:
@@ -141,8 +143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58a288b3fad68c4ca73b57b6c2071c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 0
   availableActions:
-  - {fileID: 11400000, guid: 8abc4064159c7a049b71b942c43e7b78, type: 2}
   - {fileID: 11400000, guid: 9496a98b4ebadaa40bc8a4ebc181afa7, type: 2}
 --- !u!114 &114600164019815428
 MonoBehaviour:
